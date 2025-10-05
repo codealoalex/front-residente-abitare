@@ -1,4 +1,10 @@
-
+#root{
+    --bg-color-main: #07f;
+    --bg-color-main-op: #07fa;
+    --color-border:#ddd;
+    --color-letter-light:#fff;
+    --bg-icons-light: #ddda;
+}
 *{
     padding: 0;
     margin: 0;

@@ -24,8 +24,8 @@
   align-items: center;
   justify-content: space-between;
 }
-.s_ticket-details-header>span{
-    text-transform: capitalize;
+.s_ticket-details-header > span {
+  text-transform: capitalize;
 }
 .s_ticket-details-info {
   display: flex;
@@ -109,14 +109,14 @@
 
 @media screen and (width<=1100px) {
   .s_ticket-page-details {
-    width: 80%;
+    width: 95%;
   }
   .s_ticket-page-progression {
-    width: 80%;
-  } 
-.ticket-info-image > img {
-  width: 100%;
-  height: inherit;
-  object-fit: contain;
-}
+    width: 95%;
+  }
+  .ticket-info-image > img {
+    width: 100%;
+    height: inherit;
+    object-fit: contain;
+  }
 }
