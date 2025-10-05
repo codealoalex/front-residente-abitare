@@ -1,0 +1,83 @@
+.s_tickets {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ddd;
+  padding: 20px 0;
+}
+.s_tickets-container {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  max-width: 900px;
+  padding: 20px;
+  gap: 10px;
+  background-color: #fff;
+}
+.tickets-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.tickets-header-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  background-color: var(--bg-color-main);
+  color: #fff;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+.tickets-tickets-options {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tickets-options-search {
+  flex: 2;
+}
+.tickets-options-order {
+  display: flex;
+  gap: 10px;
+}
+.search-input {
+  background-color: #eee;
+  padding: 10px 20px;
+  transition: background-color 0.1s ease-in-out;
+}
+.search-input:focus {
+  background-color: #fff;
+}
+.select-search {
+  background-color: #eee;
+  transition: background-color 0.1s ease-in-out;
+}
+.select-search:focus {
+  background-color: #fff;
+}
+
+@media screen and (width<=900px) {
+    .s_tickets-container{
+        width: 95%;
+    }
+}
+
+@media screen and (width<=400px) {
+  .s_tickets-container {
+    width: 95%;
+  }
+  .tickets-header{
+    gap: 15px;
+  }
+  .tickets-header-btn {
+    width: 100%;
+    order: -1;
+    justify-content: center;
+  }
+}
