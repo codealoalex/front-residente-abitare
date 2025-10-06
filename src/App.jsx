@@ -18,8 +18,9 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css'; 
 import 'primeflex/primeflex.css';
 
+import { Routes } from 'react-router';
+
 import './App.css'
-import CalendarComponent from './components/calendar/Calendar';
 import PanelResidente from './pages/PanelResidente';
 
 function App() {

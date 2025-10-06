@@ -4,7 +4,7 @@ const Select = ({ label_text, select_id, select_name, options, select_value, sel
   return (
     <div className="form-campo-select">
       {label_text && <label htmlFor={select_id}>{label_text}:</label>}
-      <select name={select_name} id={select_id} className={`campo-select ${className}`} value={select_value} onChange={(e) => select_set_value(e.value)}>
+      <select name={select_name} id={select_id} className={`campo-select ${className}`} value={select_value} onChange={(e) => select_set_value(e.target.value)}>
         <>
           <option className='select-option' value={default_option}>{default_option}</option>
           {options.map(option => (

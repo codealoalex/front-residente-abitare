@@ -2,22 +2,12 @@ export const opcionesNavegador = [
   {
     nombre: "Inicio",
     icono: "pi pi-home",
-    valor: "inicio",
+    valor: "",
   },
   {
     nombre: "Anuncios",
     icono: "pi pi-envelope",
     valor: "anuncios",
-  },
-  {
-    nombre: "Incidentes",
-    icono: "pi pi-exclamation-circle",
-    valor: "incidentes",
-  },
-  {
-    nombre: "Incidentes",
-    icono: "pi pi-exclamation-circle",
-    valor: "incidentes",
   },
   {
     nombre: "Incidentes",

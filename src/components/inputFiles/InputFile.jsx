@@ -7,7 +7,7 @@ import { Button } from 'primereact/button';
 import { Tooltip } from 'primereact/tooltip';
 import { Tag } from 'primereact/tag';
 
-export default function InputFile({label_text}) {
+export default function InputFile({label_text, set_value}) {
     const toast = useRef(null);
     const [totalSize, setTotalSize] = useState(0);
     const fileUploadRef = useRef(null);
@@ -15,6 +15,7 @@ export default function InputFile({label_text}) {
     const onTemplateSelect = (e) => {
         let _totalSize = totalSize;
         let files = e.files;
+        set_value(files);
 
         Object.keys(files).forEach((key) => {
             _totalSize += files[key].size || 0;

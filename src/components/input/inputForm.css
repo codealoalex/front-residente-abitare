@@ -11,7 +11,6 @@
     padding: 7px;
     border-radius: 5px;
     border: 1px solid var(--color-border);
-    transition: outline .1s ease-in-out;
 }
 .campo-input:focus{
     outline: 2px solid var(--bg-color-main);

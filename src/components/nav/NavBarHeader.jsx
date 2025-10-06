@@ -1,10 +1,13 @@
 import './navbarheader.css'
 
+import { Link } from 'react-router-dom';
+
 export default function NavBarHeader({ opciones, set_page}) {
     
-    const appearNav = () => {
+    const appearNav = (e) => {
         const $nav = document.querySelector('.nav-list');
         const $icon = document.getElementById('nav-icon');
+        const $items = document.getElementsByClassName('.nav-list-container');
         $nav.classList.toggle('nav-list-appear');
         if ($nav.classList.contains('nav-list-appear')) {
             $icon.classList.remove('pi-bars');
@@ -13,6 +16,14 @@ export default function NavBarHeader({ opciones, set_page}) {
             $icon.classList.remove('pi-times');
             $icon.classList.add('pi-bars');
         }
+    }
+
+    const hideNav = () => {
+        const $nav = document.querySelector('.nav-list');
+        const $icon = document.getElementById('nav-icon');
+        $nav.classList.remove('nav-list-appear');
+        $icon.classList.remove('pi-times');
+        $icon.classList.add('pi-bars');
     }
 
 
@@ -24,10 +35,12 @@ export default function NavBarHeader({ opciones, set_page}) {
             </div>
             <ul className="nav-list">
                 {opciones.map(opcion => (
-                    <div className='nav-list-container' onClick={() => set_page(opcion.valor)}>
-                        <i className={opcion.icono}></i>
-                        <li>{opcion.nombre}</li>
-                    </div>
+                    <Link to={`/${opcion.valor}`} style={{textDecoration:'none', color:'#000'}}>
+                        <div className='nav-list-container' onClick={hideNav}>
+                            <i className={opcion.icono}></i>
+                            <li>{opcion.nombre}</li>
+                        </div>
+                    </Link>
                 ))}
             </ul>
             <div className="nav-options">
