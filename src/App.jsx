@@ -18,15 +18,15 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css'; 
 import 'primeflex/primeflex.css';
 
-import { Routes } from 'react-router';
-
 import './App.css'
-import PanelResidente from './pages/PanelResidente';
+import PanelResidente from './pages/PanelResidente/PanelResidente';
+import PanelTecnico from './pages/PanelTecnico/PanelTecnico';
 
 function App() {
   return (
     <>
-      <PanelResidente/>
+      {/* <PanelResidente/> */}
+      <PanelTecnico/>
     </>
   )
 }

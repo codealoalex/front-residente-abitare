@@ -1,53 +1,17 @@
-import './tickets.css';
-
-import { useState } from 'react'
+import { useState } from "react";
+import { formatFecha, formatId, formatNombreTecnico } from '../../utils/format';
 import { Link } from 'react-router';
-import InputForm from '../../../components/input/InputForm'
-import Select from '../../../components/select/Select';
+import InputForm from '../input/InputForm'
+import Select from '../select/Select';
 
-const Tickets = () => {
-
+const TablaIncidentes = ({ filas, titulosTabla }) => {
     const [search, setSearch] = useState('');
     const [prioridad, setPrioridad] = useState('')
     const [estado, setEstado] = useState('');
 
-    const titulosTabla = ['ID', 'TITULO', 'FECHA', 'PRIORIDAD', 'ESTADO', 'TÉCNICO'];
-    const filas = [
-        {
-            id: "#12345",
-            titulo: "Fuga en el baño del departamento 201",
-            fecha: "2025-10-03",
-            prioridad: "Alta",
-            estado: "Pendiente",
-            tecnico:"Carlos P."
-        }, {
-            id: "#12345",
-            titulo: "Fuga en el baño del departamento 201",
-            fecha: "2025-10-03",
-            prioridad: "Alta",
-            estado: "Pendiente",
-            tecnico: "Carlos P."
-        }, {
-            id: "#12345",
-            titulo: "Fuga en el baño del departamento 201",
-            fecha: "2025-10-03",
-            prioridad: "Urgente",
-            estado: "Pendiente",
-            tecnico: "Carlos P."
-        }, {
-            id: "#12345",
-            titulo: "Fuga en el baño del departamento 201",
-            fecha: "2025-10-03",
-            prioridad: "Media",
-            estado: "Pendiente",
-            tecnico: "Carlos P."
-        },
-    ]
-
-
     return (
         <main className='s_tickets'>
-            <div className="s_tickets-container">
+            {filas ? <div className="s_tickets-container">
                 <header className='tickets-header'>
                     <h1>Tickets</h1>
                     <Link to={'reporte'}>
@@ -79,12 +43,16 @@ const Tickets = () => {
                             <tbody className='tickets-info-body'>
                                 {filas.map(fila => (
                                     <tr>
-                                        <td><span className='tickets-body-id' onClick={()=>set_page('incidentes')}>{fila.id}</span></td>
-                                        <td>{fila.titulo}</td>
-                                        <td>{fila.fecha}</td>
-                                        <td><span className='tickets-body-field'>{fila.prioridad}</span></td>
-                                        <td><span className='tickets-body-field'>{fila.estado}</span></td>
-                                        <td>{fila.tecnico}</td>
+                                        <td>
+                                            <Link to={`reporte-info/:${fila.ticket_out}`} style={{ textDecoration: 'none' }}>
+                                                <span className='tickets-body-id' onClick={() => set_page('incidentes')}>{formatId(fila.ticket_out)}</span>
+                                            </Link>
+                                        </td>
+                                        <td>{fila.titulo_out}</td>
+                                        <td>{formatFecha(fila.fecha_creacion_out)}</td>
+                                        <td><span className={`tickets-body-field ${fila.prioridad_nombre_out.toLowerCase() == "urgente" ? 'estado-rojo' : fila.prioridad_nombre_out.toLowerCase() == "medio" ? 'estado-naranja' : 'estado-verde'}`}>{fila.prioridad_nombre_out}</span></td>
+                                        <td><span className={`tickets-body-field ${fila.estado_out == "PENDIENTE" ? 'estado-pendiente' : fila.estado_out == "EN PROCESO" ? 'estado-naranja' : 'estado-verde'}`}>{fila.estado_out}</span></td>
+                                        <td>{!fila.nombres_out ? 'No asignado' : formatNombreTecnico(fila.nombres_out, fila.paterno_out, fila.materno_out)}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -92,8 +60,25 @@ const Tickets = () => {
                     </div>
                 </section>
             </div>
+                :
+                <>
+                    <div className="s_tickets-container">
+                        <header className='tickets-header'>
+                            <h1>Tickets</h1>
+                            <Link to={'reporte'}>
+                                <button className='tickets-header-btn'>
+                                    <i className='pi pi-plus '></i>
+                                    <span>Reportar nuevo incidente</span>
+                                </button>
+                            </Link>
+                        </header>
+                        <section className="tickets-tickets" style={{ padding: '20px' }}>
+                            <h2>No hay incidentes registrados</h2>
+                        </section>
+                    </div>
+                </>}
         </main>
     )
 }
 
-export default Tickets
+export default TablaIncidentes

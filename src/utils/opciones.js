@@ -1,4 +1,4 @@
-export const opcionesNavegador = [
+export const opcionesNavegadorResidente = [
   {
     nombre: "Inicio",
     icono: "pi pi-home",
@@ -14,6 +14,29 @@ export const opcionesNavegador = [
     icono: "pi pi-exclamation-circle",
     valor: "incidentes",
   },
+];
+
+export const opcionesNavegadorTecnico = [
+  {
+    nombre: "Inicio",
+    icono: "pi pi-home",
+    valor: "",
+  },
+  {
+    nombre: "Anuncios",
+    icono: "pi pi-envelope",
+    valor: "anuncios-tecnico",
+  },
+  {
+    nombre: "Incidentes",
+    icono: "pi pi-exclamation-circle",
+    valor: "incidentes-tecnico",
+  },
+  {
+    nombre: "Herramientas",
+    icono: "pi pi-hammer",
+    valor:"herramientas"
+  }
 ];
 
 export const opcionesAvatar = [

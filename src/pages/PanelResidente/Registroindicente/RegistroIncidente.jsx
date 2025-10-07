@@ -1,9 +1,9 @@
 import './registroIncidente.css';
 
 import { useEffect, useState } from 'react'
-import InputForm from '../../components/input/InputForm'
-import Select from '../../components/select/Select';
-import InputFile from '../../components/inputFiles/InputFile';
+import InputForm from '../../../components/input/InputForm'
+import Select from '../../../components/select/Select';
+import InputFile from '../../../components/inputFiles/InputFile';
 
 const RegistroIncidente = () => {
   const [niveles, setNiveles] = useState([]);
@@ -73,7 +73,15 @@ const RegistroIncidente = () => {
       });
       const respuesta = await conexion.json();
       if (!conexion.ok) alert(respuesta.message);
-      console.log(respuesta);
+      if (conexion.status == 201) {
+        alert(respuesta.message)
+        setTitulo(null);
+        setDescripcion(null);
+        setNivel(null);
+        setUbicacion(null);
+        setTipo(null);
+        setFilesAll(null);
+      }
     } catch (e) {
       console.error(e.message);
     }

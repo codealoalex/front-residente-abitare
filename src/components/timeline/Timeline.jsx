@@ -1,12 +1,17 @@
 import './timeLine.css';
 import { Timeline } from 'primereact/timeline';
 
-export default function TimelineCmp() {
+
+export default function TimelineCmp({ creacion = '-', proceso = '-', cerrado = '-' }) {
+
     const events = [
-        { status: 'Ticket Creado', date: '15/10/2020 10:30', icon: 'pi pi-shopping-cart', color: '#9C27B0', image: 'game-controller.jpg' },
-        { status: 'En Proceso', date: '15/10/2020 14:00', icon: 'pi pi-cog', color: '#673AB7' },
-        { status: 'Cerrado', date: '15/10/2020 16:15', icon: 'pi pi-shopping-cart', color: '#f00' },
+        { status: 'Ticket Creado', date: creacion},
+        { status: 'En Proceso', date: proceso},
+        { status: 'Cerrado', date: cerrado },
     ];
+
+    const $procesos = document.getElementsByClassName('p-timeline-event-marker');
+    if (creacion != '-') $procesos.item(0)  && $procesos.item(0).classList.add('primero')
 
     return (
         <div className="card">
