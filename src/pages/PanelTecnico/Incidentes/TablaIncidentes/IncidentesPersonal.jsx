@@ -11,7 +11,7 @@ const IncidentesPersonal = () => {
     const [filas, setFilas] = useState(null);
 
     /* Se obtienen del localstorage o simplemente de descomponer la cookie */
-    const idTecnico = 6;
+    const idTecnico = 12;
 
     useEffect(() => {
         const obtenerIncidentes = async () => {

@@ -13,7 +13,7 @@ const PanelTecnico = () => {
                 <Route path="/" element={<h1>Hola usuario</h1>} />
                 <Route path="/anuncios-tecnico" element={<h1>Página de anuncios</h1>} />
                 <Route path="/incidentes-tecnico/*" element={<IncidentesTecnico />} />
-                <Route path="/herramientas" element={<ConfirmacionFormulario/>} />
+                <Route path="/herramientas" element={<h1>Herramientas</h1>} />
             </Routes>
         </div>
     )

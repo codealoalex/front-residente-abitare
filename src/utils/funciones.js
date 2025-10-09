@@ -7,5 +7,5 @@ export const determinarColorEstado = (estado) => {
 export const determinarColorPrioridad = (estado) => {
   if (estado.toLowerCase() == "urgente") return "urgente";
   if (estado.toLowerCase() == "normal") return "medio";
-  if (estado.toLowerCase() == "bajo") return "bajo";
+  if (estado.toLowerCase() == "baja") return "bajo";
 };

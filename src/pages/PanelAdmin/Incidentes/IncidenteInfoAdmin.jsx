@@ -21,6 +21,7 @@ const IncidenteInfoAdmin = () => {
                 }
                 const respuesta = await conexion.json();
                 setInfoIncidente(respuesta.incidente);
+                console.log(respuesta.incidente);
             } catch (e) {
                 alert("Error en la conexion, intentelo más tarde")
             }
@@ -66,7 +67,7 @@ const IncidenteInfoAdmin = () => {
             }
             if (conexion.status == 201) {
                 alert(respuesta.message);
-                document.location.reload();
+                window.location.href = "/"
             }
         } catch (e) {
             console.error(e.message);
@@ -179,7 +180,51 @@ const IncidenteInfoAdmin = () => {
                                 }
                             </section>
                             :
-                            <h1>Hola</h1>
+                            <>
+
+                                <section>
+                                    <article className='admin-info-box admin-more-info'>
+                                        <h3>Información Personal Asignado</h3>
+                                        <div className="admin-info-residente">
+                                            <div>
+                                                <h4>Nombre</h4>
+                                                <p>{infoIncidente.nombre_personal_out} {infoIncidente.paterno_personal_out} {infoIncidente.materno_personal_out}</p>
+                                            </div>
+                                            <div>
+                                                <h4>Número de contacto</h4>
+                                                <p>{infoIncidente.celular_personal_out}</p>
+                                            </div>
+                                            <div>
+                                                <h4>Carnet de identidad</h4>
+                                                <p>{infoIncidente.ci_personal_out}</p>
+                                            </div>
+                                            <div>
+                                                <h4>Correo electrónico</h4>
+                                                <p>{infoIncidente.email_personal_out}</p>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </section>
+                                <section>
+                                    <article className='admin-info-box admin-more-info'>
+                                        <h3>Linea Temporal</h3>
+                                        <div className="admin-info-residente">
+                                            <div>
+                                                <h4>Fecha creacion</h4>
+                                                <p>{formatFecha(infoIncidente.fecha_creacion_out)}</p>
+                                            </div>
+                                            <div>
+                                                <h4>Fecha asignacion</h4>
+                                                <p>{formatFecha(infoIncidente.fecha_asignacion_out)}</p>
+                                            </div>
+                                            <div>
+                                                <h4>Fecha finalizacion</h4>
+                                                <p>{infoIncidente.fecha_cierre_out ? formatFecha(infoIncidente.fecha_cierre_out) : '-'}</p>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </section>
+                            </>
                     }
                 </section>
             </>}
