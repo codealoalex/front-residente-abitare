@@ -21,12 +21,14 @@ import 'primeflex/primeflex.css';
 import './App.css'
 import PanelResidente from './pages/PanelResidente/PanelResidente';
 import PanelTecnico from './pages/PanelTecnico/PanelTecnico';
+import PantallaIncidentesAdmin from './pages/PanelAdmin/PantallaIncidentesAdmin';
 
 function App() {
   return (
     <>
-      {/* <PanelResidente/> */}
-      <PanelTecnico/>
+      <PanelResidente/>
+      {/* <PanelTecnico/> */}
+      {/* <PantallaIncidentesAdmin/> */}
     </>
   )
 }

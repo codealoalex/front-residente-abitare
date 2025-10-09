@@ -15,6 +15,7 @@ const TicketPage = () => {
                 const conexion = await fetch(`http://localhost:10000/api/incidente/informacion-incidente/${idPage}`);
                 const incidente = await conexion.json();
                 setInfo(incidente.incidente)
+                console.log(incidente)
             } catch (e) {
                 console.error(e.message);
             }
@@ -22,7 +23,39 @@ const TicketPage = () => {
         obtenerInfoIncidente();
     }, [])
 
-    const estado = ['rojo', 'verde', 'naranja']
+    const [check, setCheck] = useState(false);
+
+    const handleValidacion = () => {
+        if (!check) setCheck(true)
+        else setCheck(false)
+    }
+
+    const validarTrabajo = async (e) => {
+        e.preventDefault();
+        const data = {
+            ticket: parseInt(idPage)
+        }
+        if (check) {
+            try {
+                const conexion = await fetch('http://localhost:10000/api/residente/validar-trabajo', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify(data),
+                    credentials: 'include'
+                });
+                const respuesta = await conexion.json();
+                alert(respuesta.message);
+                document.location.reload();
+            } catch (e) {
+                console.error(e.message)
+            }
+        } else {
+            alert('Debe aceptar la validacion')
+        }
+    }
+
 
     return (
         <main className='s_ticket-page'>
@@ -53,7 +86,7 @@ const TicketPage = () => {
                                 </div>
                                 <div className='ticket-info-c2'>
                                     <h4>Técnico asignado</h4>
-                                    <p>{info.nombres_out ? `${ info.nombres_out } ${info.paterno_out} ${info.materno_out}`:'No tiene un tecnico asignado'}</p>
+                                    <p>{info.nombres_out ? `${info.nombres_out} ${info.paterno_out} ${info.materno_out}` : 'No tiene un tecnico asignado'}</p>
                                 </div>
                             </div>
                             <div className='ticket-info-c3'>
@@ -76,7 +109,25 @@ const TicketPage = () => {
                         </article>
                         <article className='s_ticket-details-validate'>
                             <h3>Validacion y Conformidad</h3>
-                            <p></p>
+                            {
+                                info.estado_out == 'RESUELTO'
+                                    ?
+                                    info.firma_valida_out
+                                        ?
+                                        <p>Se registró su respuesta</p>
+                                        :
+                                        <>
+                                            <div className="ticket-validate-check">
+                                                <input type="checkbox" name="validate-incidente" id="validate-incidente" onClick={handleValidacion} />
+                                                <p>Usted confirma que el incidente reportado por su persona fue concluido con éxito, lo que hace que el edificio no acepte reclamos futuros con respecto a alguna falla o desperfecto encontrado</p>
+                                            </div>
+                                            <button onClick={validarTrabajo}>Validar</button>
+                                        </>
+                                    :
+                                    <p>
+                                        Podrá validar el trabajo realizado cuando este sea finalizado por el tecnico asignado
+                                    </p>
+                            }
                         </article>
                     </section>
                     <section className='s_ticket-page-progression'>
@@ -92,7 +143,9 @@ const TicketPage = () => {
                         </article>
                         <article className='s_ticket-progression-progress'>
                             <h3>Seguimiento del Ticket</h3>
-                            <TimelineCmp creacion={formatFecha(info.fecha_creacion_out, '/')} />
+                            <TimelineCmp creacion={formatFecha(info.fecha_creacion_out, '/')}
+                                proceso={info.fecha_asignacion_out ? formatFecha(info.fecha_asignacion_out, '/') : '-'}
+                                cerrado={info.fecha_cierre_out ? formatFecha(info.fecha_cierre_out, '/') : '-'} />
                         </article>
                     </section>
                 </>

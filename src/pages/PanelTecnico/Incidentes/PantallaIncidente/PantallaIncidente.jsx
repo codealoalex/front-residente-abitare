@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
-import { formatFecha } from '../../../../utils/format';
+import { formatFecha, formatId } from '../../../../utils/format';
 import Modal from '../../../../components/modal/Modal';
 
 /* Los estilos se encuentran en los estilos de  PanelResidente/Incidentes/TicketPage*/
 import './pantallaIncidente.css';
+import ConfirmacionFormulario from '../FormularioConfirmacion/ConfirmacionFormulario';
 
 
 const PantallaIncidente = () => {
         const url = window.location.href;
-        const idPage = url.split(':').reverse()[0].toString().padStart(5, '0');
+    const idPage = url.split(':').reverse()[0];
         const [info, setInfo] = useState(null);
     
         useEffect(() => {
@@ -18,7 +19,6 @@ const PantallaIncidente = () => {
                     if (!conexion) throw new Error("Error al establecer la conexion");
                     const incidente = await conexion.json();
                     setInfo(incidente.incidente);
-                    console.log(incidente.incidente)
                 } catch (e) {
                     console.error(e.message);
                 }
@@ -33,9 +33,15 @@ const PantallaIncidente = () => {
                     <section className='s_ticket-page-details'>
                         <article className='s_ticket-details-info'>
                             <header className='s_ticket-details-header' style={{gap:'15px', justifyContent:'space-between'}}>
-                                <h2>Detalle del Ticket #{idPage}</h2>
+                                <h2>Detalle del Ticket {formatId(idPage)}</h2>
                                 <div className="ticket-header-options">
-                                    <Modal modal_content={"Al confirmar que el trabajo asignado a su persona fue finalizado, esta acción se notificará al administrador."} btn_label={"Finalizar trabajo"}/>
+                                    {
+                                        (info.fecha_cierre_out)
+                                            ?
+                                            <span>Finalizado</span>
+                                            :
+                                            <Modal modal_content={<ConfirmacionFormulario tecnico={6} ticket={idPage} />} btn_label={"Finalizar trabajo"} />
+                                    }
                                     <span className={` ticket-header-prioridad ${info.prioridad_nombre_out.toLowerCase() == "urgente" ? 'estado-rojo' : info.prioridad_nombre_out.toLowerCase() == "medio" ? 'estado-naranja' : 'estado-verde'}`}>
                                         {info.prioridad_nombre_out}
                                     </span>

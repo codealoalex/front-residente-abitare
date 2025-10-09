@@ -21,6 +21,13 @@
 @media screen and (width<=680px) {
   .s_ticket-details-header{
     flex-direction: column;
+    margin-bottom: 10px;
+  }
+  .s_ticket-details-header>h2{
+    text-align: center;
+  }
+  .ticket-header-options{
+    justify-content: center;
   }
   .p-button{
     position: static;
