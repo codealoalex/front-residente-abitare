@@ -27,9 +27,9 @@ import PantallaIncidenteAdmin from './pages/PanelAdmin/PantallaIncidentesAdmin';
 function App() {
   return (
     <>
-      {/* <PanelResidente/> */}
+      <PanelResidente/>
       {/* <PanelTecnico/> */}
-      <PantallaIncidenteAdmin/>
+      {/* <PantallaIncidenteAdmin/> */}
     </>
   )
 }

@@ -21,7 +21,6 @@ const IncidenteInfoAdmin = () => {
                 }
                 const respuesta = await conexion.json();
                 setInfoIncidente(respuesta.incidente);
-                console.log(respuesta.incidente);
             } catch (e) {
                 alert("Error en la conexion, intentelo más tarde")
             }
@@ -43,6 +42,25 @@ const IncidenteInfoAdmin = () => {
             obtenerPersonal();
         }
     }, [infoIncidente])
+
+    const [imagenes, setImagenes] = useState(null);
+
+    useEffect(() => {
+        const obtenerImagenes = async () => {
+            try {
+                const conexion = await fetch(`http://localhost:10000/api/incidente/imagenes-ticket/:${idIncidente}`, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                console.log(conexion);
+                const respuesta = await conexion.json();
+                setImagenes(respuesta.imagenes);
+            } catch (e) {
+                console.error(e.message);
+            }
+        }
+        obtenerImagenes();
+    }, [])
 
     const asignarPersonal = async (e) => {
         e.preventDefault();
@@ -119,9 +137,16 @@ const IncidenteInfoAdmin = () => {
                     <article className='admin-info-images'>
                         <h3>Galería de Fotos</h3>
                         <div className='admin-images-box'>
-                            <div><img src="https://c.files.bbci.co.uk/15C01/production/_106598098_gettyi33758.jpg" alt="" /></div>
-                            <div><img src="https://c.files.bbci.co.uk/15C01/production/_106598098_gettyi33758.jpg" alt="" /></div>
-                            <div><img src="https://c.files.bbci.co.uk/15C01/production/_106598098_gettyi33758.jpg" alt="" /></div>
+                            {imagenes && imagenes.map(imagen => (
+                                <div>
+                                    {imagen.tipo_mime == "video/mp4"
+                                        ?
+                                        <video src={`http://localhost:10000/public/images/${imagen.nombre_archivo}`} controls>
+                                        </video>
+                                        :
+                                        <img src={`http://localhost:10000/public/images/${imagen.nombre_archivo}`} alt="Foto 1" />}
+                                </div>
+                            ))}
                         </div>
                     </article>
                 </section>

@@ -55,6 +55,11 @@
 .ticket-info-image {
   height: 150px;
 }
+.ticket-info-image > video {
+  width: 100%;
+  height: inherit;
+  object-fit: cover;
+}
 .ticket-info-image > img {
   width: 100%;
   height: inherit;

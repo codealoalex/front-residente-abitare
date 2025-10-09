@@ -15,13 +15,31 @@ const TicketPage = () => {
                 const conexion = await fetch(`http://localhost:10000/api/incidente/informacion-incidente/${idPage}`);
                 const incidente = await conexion.json();
                 setInfo(incidente.incidente)
-                console.log(incidente)
             } catch (e) {
                 console.error(e.message);
             }
         }
         obtenerInfoIncidente();
     }, [])
+
+    const [imagenes, setImagenes] = useState(null);
+    
+    useEffect(() => {
+        const obtenerImagenes = async () => {
+            try {
+                const conexion = await fetch(`http://localhost:10000/api/incidente/imagenes-ticket/:${idPage}`, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                const respuesta = await conexion.json();
+                setImagenes(respuesta.imagenes);
+            } catch (e) {
+                console.error(e.message);
+            }
+        }
+        obtenerImagenes();
+    },[])
+
 
     const [check, setCheck] = useState(false);
 
@@ -92,13 +110,25 @@ const TicketPage = () => {
                             <div className='ticket-info-c3'>
                                 <h3>Fotos adjuntas</h3>
                                 <div className='ticket-info-c3-images'>
-                                    <div className="ticket-info-image">
+                                    {
+                                        imagenes && imagenes.map(imagen => (
+                                            <div className="ticket-info-image">
+                                                {imagen.tipo_mime == "video/mp4"
+                                                    ?
+                                                    <video src={`http://localhost:10000/public/images/${imagen.nombre_archivo}`} controls>
+                                                    </video>
+                                                    :
+                                                    <img src={`http://localhost:10000/public/images/${imagen.nombre_archivo}`} alt="Foto 1" />}
+                                            </div>
+                                        ))
+                                    }
+                                    {/* <div className="ticket-info-image">
 
                                         <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQrEilm311fNJO_QotjhwgUZmT6oB37xYoYh9ogGU8oczW7zTTzLO2CfjF7j9l0zv1E2sE0R26k3bpbGsmjx5jUByRPw62CskSfB6iNmQc" alt="Foto 1" />
                                     </div>
                                     <div className="ticket-info-image">
                                         <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQrEilm311fNJO_QotjhwgUZmT6oB37xYoYh9ogGU8oczW7zTTzLO2CfjF7j9l0zv1E2sE0R26k3bpbGsmjx5jUByRPw62CskSfB6iNmQc" alt="Foto 1" />
-                                    </div>
+                                    </div> */}
                                 </div>
                                 {/* <Carrusel/> */}
                             </div>
