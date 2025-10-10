@@ -3,7 +3,6 @@ import './incidenteInfoAdmin.css';
 import { useEffect, useState } from 'react'
 import { formatFecha, formatId } from '../../../utils/format';
 import { determinarColorEstado, determinarColorPrioridad } from '../../../utils/funciones';
-import Modal from '../../../components/modal/Modal';
 
 const IncidenteInfoAdmin = () => {
     const idIncidente = window.location.href.split(':').reverse()[0];
@@ -85,7 +84,7 @@ const IncidenteInfoAdmin = () => {
             }
             if (conexion.status == 201) {
                 alert(respuesta.message);
-                window.location.href = "/"
+                window.location.reload();
             }
         } catch (e) {
             console.error(e.message);

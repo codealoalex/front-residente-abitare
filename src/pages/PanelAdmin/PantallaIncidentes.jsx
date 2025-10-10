@@ -22,9 +22,25 @@ const PantallaIncidentes = () => {
         obtenerIncidentes();
     }, []);
 
+
+    const cerrarSesion = async () => {
+        try {
+            const conexion = await fetch('http://localhost:10000/api/usuario/logout');
+            if (!conexion) throw new Error("No fue posible cerrar la sesion");
+            alert("Sesion finalizada");
+            localStorage.removeItem('id');
+            localStorage.removeItem('tipo');
+            localStorage.removeItem('token');
+            window.location.reload();
+        } catch (e) {
+            console.error(e.message);
+        }
+    }
+
   return (
     <main className='s_admin-incidentes'>
           <h1 className='admin-incidentes-title'>Incidentes Registrados</h1>
+          <button onClick={cerrarSesion}>Log out</button>
           <div className='admin-incidentes-cards'>
               {incidentes ? incidentes.map((item, key) => (
                   <article key={key} className='admin-cards-card'>

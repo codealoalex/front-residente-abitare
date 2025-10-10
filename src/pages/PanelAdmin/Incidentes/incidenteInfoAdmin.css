@@ -62,6 +62,11 @@
     height: inherit;
     object-fit: cover;
 }
+.admin-images-box>div>video{
+    width: 100%;
+    height: inherit;
+    object-fit: cover;
+}
 
 /* Segunda columna */
 

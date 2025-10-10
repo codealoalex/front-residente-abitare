@@ -26,6 +26,20 @@ export default function NavBarHeader({ opciones, set_page}) {
         $icon.classList.add('pi-bars');
     }
 
+    const cerrarSesion = async () => {
+        try {
+            const conexion = await fetch('http://localhost:10000/api/usuario/logout');
+            if (!conexion) throw new Error("No fue posible cerrar la sesion");
+            alert("Sesion finalizada");
+            localStorage.removeItem('id');
+            localStorage.removeItem('tipo');
+            localStorage.removeItem('token');
+            window.location.reload();
+        } catch (e) {
+            console.error(e.message);
+        }
+    }
+
 
     return (
         <nav className='nav'>
@@ -49,6 +63,7 @@ export default function NavBarHeader({ opciones, set_page}) {
                     <i className='pi pi-user'></i>
                     <span>Usuario</span>
                 </div>
+                <button onClick={cerrarSesion}>Log out</button>
             </div>
         </nav>
     )

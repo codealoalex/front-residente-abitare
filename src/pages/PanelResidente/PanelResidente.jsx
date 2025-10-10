@@ -9,9 +9,9 @@ const PanelResidente = () => {
         <div>
             <NavBarHeader opciones={opcionesNavegadorResidente} />
             <Routes>
-                <Route path="/" element={<h1>Hola usuario</h1>} />
-                <Route path="/anuncios" element={<h1>Página de anuncios</h1>} />
-                <Route path="/incidentes/*" element={<Incidentes />} />
+                <Route path="" element={<h1>Hola usuario</h1>} />
+                <Route path="anuncios" element={<h1>Página de anuncios</h1>} />
+                <Route path="incidentes/*" element={<Incidentes />} />
             </Routes>
         </div>
     )
